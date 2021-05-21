@@ -108,7 +108,7 @@ function Application() {
                         </Menu.Item>**/}
                     </Menu>
                 </Sider>
-                <Layout className="site-layout" style={{height:'60em'}}>
+                <Layout className="site-layout" style={{height:'100%'}}>
                     <Header className="site-layout-sub-header-background"/**className="site-layout-background"**/ style={{ padding: 0, }}>
                         <Row>
                             <Col xs={20} sm={18} md={20} lg={20} xl={20} xxl={22}>
@@ -129,14 +129,8 @@ function Application() {
                         </Row>
                        
                     </Header>
-                    <Content style={{ margin: '24px 16px 0' }}
-                        /**className="site-layout-background"
-                        style={{
-                            padding: '3%',
-                            minHeight: 280,
-                        }}**/
-                    >
-                        <div className="site-layout-background" style={{ padding: 24, minHeight: 360 }}>
+                    <Content style={{ padding:'3%', minHeight: '110%',maxHeight:'200%' }}>
+                        <div className="site-layout-background" style={{ minHeight: '100%' }}>
                             <Switch>
                                 <Route 
                                     exact path="/"
