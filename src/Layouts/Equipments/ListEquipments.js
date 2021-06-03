@@ -1,12 +1,14 @@
 import React, {useEffect, useState} from 'react'
-import { Table, Input, InputNumber, Popconfirm, Form, Typography, Space, Row, Col } from 'antd';
+import { Table, Input, InputNumber, Popconfirm, Form, Typography, Space, Row, Col, Tag, Button } from 'antd';
 import {db} from '../../Config/Firebase'
 import {
   EyeOutlined,
   EditOutlined,
   DeleteOutlined,
   CheckOutlined,
-  CloseOutlined
+  CheckCircleOutlined,
+  CloseOutlined,
+  SettingOutlined
 } from '@ant-design/icons';
 import {useHistory} from 'react-router-dom'
 
@@ -42,23 +44,25 @@ export default function ListEquipments() {
           var snapshot = await db.collection("Equipments").get();
           snapshot.forEach((doc) => {
               const { 
-                idEquipment,
+                id,
                 name,
                 ubication,
                 lastLog,
+                LastData,
                 dateLastLog,
-                state,
+                Status,
                 grow
               } = doc.data();
               list.push({
-                  id: doc.id,
-                  idEquipment,
-                  name,
-                  ubication,
-                  lastLog,
-                  dateLastLog,
-                  state,
-                  grow
+                id: doc.id,
+                id,
+                name,
+                ubication,
+                lastLog,
+                LastData,
+                dateLastLog,
+                Status,
+                grow
               });
 
           });
@@ -136,35 +140,55 @@ export default function ListEquipments() {
     const columns = [
       {
         title: 'Identificador',
-        dataIndex: 'idEquipment',
-        key: 'idEquipment',
-        width: '15%',
+        dataIndex: 'id',
+        key: 'id',
+        width: '10%',
+        align:'center'
       },
       {
         title: 'Equipo',
         dataIndex: 'name',
         key: 'name',
         editable: true,
-        width: '30%',
+        width: '15%',
+        align:'center'
+      },
+      {
+        title: 'Estado',
+        dataIndex: 'Status',
+        key: 'Status',
+        width: '5%',
+        render: (record) => (
+          record == 'active' ? (
+            <Tag color='Green'>Activo</Tag>
+          ):(
+            <Tag color='Red'>Inactivo</Tag>
+          )
+        ),
+        align:'center',
+
       },
       {
         title: 'Cultivo',
         dataIndex: 'grow',
         key: 'grow',
         editable: true,
-        width: '30%',
+        width: '20%',
+        align:'center'
       },
       {
-        title: 'Fecha último Log',
-        dataIndex: 'dateLastLog',
-        key: 'dateLastLog',
+        title: 'Fecha último dato',
+        dataIndex: 'LastData',
+        key: 'LastData',
         width: '30%',
+        align:'center'
       },
       {
         title: 'Último Log',
         dataIndex: 'lastLog',
         key: 'lastLog',
         width: '30%',
+        align:'center'
       },
       {
         title: '',
@@ -183,31 +207,51 @@ export default function ListEquipments() {
             </Col>
             
             <Col>
-             <Popconfirm title="Desea cancelar?" onConfirm={cancel}>
+              <Popconfirm title="Desea cancelar?" onConfirm={cancel}>
                 <CloseOutlined style={{ fontSize: '150%', color:'red'}}/>
               </Popconfirm>
             </Col>
           </Row>
           ) : (
             <Space size="middle">
-
-              <EyeOutlined 
-                style={{ fontSize: '150%'}} 
-                onClick={() => history.push({
-                  pathname: 'equipments/' + record.id + '/details', 
-                  state: { 
+              {record.Status == 'active' ? (
+                <>
+                <EyeOutlined 
+                  style={{ fontSize: '150%'}} 
+                  onClick={() => history.push({
+                    pathname: 'equipments/' + record.id + '/details', 
+                    state: { 
+                        idEquipment: record.id,
+                        name: record.name,
+                        grow: record.grow,
+                        status: record.Status
+                    }
+                  })} 
+                />
+                <a>
+                  <EditOutlined style={{ fontSize: '150%'}} onClick={() => edit(record)}/>
+                </a>
+                
+                <DeleteOutlined style={{ fontSize: '150%', color:'red'}} />
+              </>
+              ):(
+                <Button 
+                  onClick={() => history.push({
+                    pathname: '/equipments/' + record.id + '/activate', 
+                    state: { 
                       idEquipment: record.id,
-                      name: record.name,
-                      grow: record.grow,
-                      state: record.state
-                  }
-                })} 
-              />
-              <a>
-                <EditOutlined style={{ fontSize: '150%'}} onClick={() => edit(record)}/>
-              </a>
-
-              <DeleteOutlined style={{ fontSize: '150%', color:'red'}} />
+                    }
+                  })} 
+                  type="primary" 
+                  style={{backgroundColor:'green', borderColor:'green'}} 
+                  shape="round" 
+                  icon={<CheckCircleOutlined />} 
+                  size='middle' 
+                >
+                  Activar
+                </Button>
+              )}
+              
             
             </Space>
           );
@@ -234,7 +278,14 @@ export default function ListEquipments() {
       
     return (
       <div>
-        <Title>Equipos</Title>
+        <Row type="flex" style={{alignItems:'center', marginBottom:'2%'}}>
+          <Col xs={22} sm={22} md={23} lg={23} xl={23} xxl={23}>
+            <Title style={{marginTop:'1%'}}>Equipos</Title>
+          </Col>
+          <Col xs={2} sm={2} md={1} lg={1} xl={1} xxl={1}>
+            <SettingOutlined onClick={() => history.push('/equipments/config')} style={{fontSize:'160%'}} />
+          </Col>
+        </Row>
         <Form form={form} component={false}>
           <Table
             components={{
@@ -242,7 +293,7 @@ export default function ListEquipments() {
                 cell: EditableCell,
               },
             }}
-            bordered
+      
             dataSource={equipments}
             columns={mergedColumns}
             rowClassName="editable-row"

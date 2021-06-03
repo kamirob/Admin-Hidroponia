@@ -18,6 +18,8 @@ import ControlPanel from "../ControlPanel/ControlPanel";
 import ListEquipments from "../Equipments/ListEquipments";
 import ListUsers from "../Users/ListUsers";
 import DetailsEquipment from "../Equipments/DetailsEquipment";
+import ConfigFormEquipment from "../Equipments/ConfigFormEquipment";
+import ActivateEquipment from "../../Components/Equipments/ActivateEquipment";
 
 
 const { Header, Content, Footer, Sider } = Layout;
@@ -48,7 +50,7 @@ function Application() {
     return (
         auth.currentUser ?
         <Router>
-            <Layout style={{ minHeight: '100%' }} >
+            <Layout >
                 <Sider 
                     breakpoint="lg"
                     collapsedWidth="0"
@@ -108,8 +110,8 @@ function Application() {
                         </Menu.Item>**/}
                     </Menu>
                 </Sider>
-                <Layout className="site-layout" style={{height:'100%'}}>
-                    <Header className="site-layout-sub-header-background"/**className="site-layout-background"**/ style={{ padding: 0, }}>
+                <Layout className="site-layout" >
+                    <Header className="site-layout-sub-header-background"/**className="site-layout-background"**/ >
                         <Row>
                             <Col xs={20} sm={18} md={20} lg={20} xl={20} xxl={22}>
                                 {/**<Menu mode="horizontal" selectable={false} >
@@ -127,10 +129,10 @@ function Application() {
                                 </Menu>
                             </Col>
                         </Row>
-                       
+                    
                     </Header>
-                    <Content style={{ padding:'3%', minHeight: '110%',maxHeight:'200%' }}>
-                        <div className="site-layout-background" style={{ minHeight: '100%' }}>
+                    <Content style={{padding:'2%', minHeight:'100vh'}}/**style={{ padding:'3%', height: '150%' }}**/>
+                        <div className="site-layout-background" style={{ padding: '2%'}}/**style={{ height: '150%', padding:'3%' }}**/>
                             <Switch>
                                 <Route 
                                     exact path="/"
@@ -145,8 +147,16 @@ function Application() {
                                     component={ListEquipments}
                                 />
                                 <Route 
+                                    exact path="/equipments/:id/activate"
+                                    component={ActivateEquipment}
+                                />
+                                <Route 
                                     exact path="/equipments/:id/details"
                                     component={DetailsEquipment}
+                                />
+                                <Route 
+                                    exact path="/equipments/config"
+                                    component={ConfigFormEquipment}
                                 />
                                 <Route 
                                     exact path="/users"
@@ -156,10 +166,9 @@ function Application() {
                                     exact path="/control-panel"
                                     component={ControlPanel}
                                 />
-                                <Redirect to="/dashboard"/>
+                                <Redirect to="/equipments/"/>
                             </Switch>
-                        </div>
-                       
+                        </div> 
                     </Content>
                     <Footer style={{ textAlign: 'center' }}>AdminWeb ©2021 por Camilo Bastidas</Footer>
                 </Layout>
