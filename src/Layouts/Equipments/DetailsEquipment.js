@@ -8,6 +8,9 @@ import {db} from '../../Config/Firebase'
 import TemperatureComponent from '../../Components/Equipments/TemperatureComponent';
 import VentilationComponent from '../../Components/Equipments/VentilationComponent';
 import HoursLight from '../../Components/Equipments/HoursLight';
+import NutrientPumping from '../../Components/Equipments/NutrientPumping';
+import Flush from '../../Components/Equipments/Flush';
+import EcpHComponent from '../../Components/Equipments/EcpHComponent';
 
 export default function DetailsEquipment() {
     const { Title, Text} = Typography;
@@ -23,11 +26,12 @@ export default function DetailsEquipment() {
     const [ loading, setLoading ] = useState(true);
     const [ error, setError ] = useState();
     const [ equipment, setEquipment] = useState([]);
-    
-    const [ lastData, setLastData] = useState();
+    const [ dataApp, setDataApp] = useState([]);
+
     
     useEffect(() => {
         dateActual()
+        getDataApp()
         const unsubscribe = db.collection('Equipments').where('id', '==', idEquipment).onSnapshot(snap => {
             //const data = snap.docs.map(doc => doc.data())
             snap.forEach(doc => {
@@ -35,7 +39,6 @@ export default function DetailsEquipment() {
                 //console.log(doc.data())
             })
         });
-          //remember to unsubscribe from your realtime listener on unmount or you will create a memory leak
         return () => unsubscribe()
     },[]);
 
@@ -46,7 +49,19 @@ export default function DetailsEquipment() {
         }
     }
 
-   
+    const getDataApp = async() => {
+        try{
+            db.collection('Equipments').doc(idEquipment).collection('DataApp').onSnapshot(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    setDataApp(doc.data())
+                })
+            });
+        }catch(e){
+            console.log(e)
+        }  
+    } 
+
+
     const renderContent = (column = 1) => (
         <Row type="flex" justify="space-between" align="middle" >
             <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
@@ -66,7 +81,6 @@ export default function DetailsEquipment() {
                 </Descriptions>
             </Col>
         </Row>
-       
     );
       
     const extraContent = (
@@ -132,25 +146,37 @@ export default function DetailsEquipment() {
                     </Button>
                 ]}
                 footer={
-                    <Tabs defaultActiveKey="1" size='large' >
-                        <TabPane tab="Temperatura" key="1" >
+                    <Tabs defaultActiveKey="1" size='large'>
+                        <TabPane tab="EC y pH" key="1">
                             <div style={{marginTop:'2%'}} >
-                                <TemperatureComponent data={equipment} />
+                                <EcpHComponent/>
                             </div>
                         </TabPane>
                         <TabPane tab="Ventilación" key="2" >
                             <div style={{marginTop:'2%'}} >
-                                <VentilationComponent data={equipment} />
+                                <VentilationComponent datain={dataApp} data={equipment} />
                             </div>
                         </TabPane>
-                        <TabPane tab="Horas de Luz" key="3">
+                        <TabPane tab="Temperatura" key="3">
                             <div style={{marginTop:'2%'}} >
-                                <HoursLight/>
+                                <TemperatureComponent datain={dataApp} data={equipment} />
                             </div>
                         </TabPane>
-                        <TabPane tab="EC y pH" key="4" />
-                        <TabPane tab="Bombeo nutrientes" key="5" />
-                        <TabPane tab="Flush" key="6" />
+                        <TabPane tab="Horas de luz" key="4">
+                            <div style={{marginTop:'2%'}}>
+                                <HoursLight datain={dataApp} data={equipment}/>
+                            </div>
+                        </TabPane>
+                        <TabPane tab="Bombeo nutrientes" key="5" >
+                            <div style={{marginTop:'2%'}} >
+                                <NutrientPumping/>
+                            </div>    
+                        </TabPane>
+                        <TabPane tab="Flush" key="6" >
+                            <div style={{marginTop:'2%'}} >
+                                <Flush/>
+                            </div>  
+                        </TabPane>
                     </Tabs>
                 }
                 >
