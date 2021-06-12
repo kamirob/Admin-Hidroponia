@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { Card, Row, Col, Form, notification, Select, Button, TimePicker} from 'antd';
 import {db} from '../../Config/Firebase'
 import {SmileOutlined} from '@ant-design/icons';
+import {Humidity} from 'react-environment-chart';
 import dayjs from 'dayjs'
 import 'dayjs/locale/es' 
 
@@ -58,9 +59,9 @@ export default function HoursLight(props) {
     return (
         <div style={{marginBottom:'3%'}}>  
             <Row type="flex" justify="space-between" align="middle" >
-                <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
+                <Col xs={24} sm={24} md={8} lg={8} xl={8} xxl={8}>
                     <Card title='Variables' style={{margin:'2%', minHeight:'50vh'}}>
-                        <div style={{marginTop:'2%', marginBottom:'2%'}}>
+                        <div style={{marginTop:'2%', marginBottom:'10%'}}>
                             <Select placeholder="Cambiar estado" style={{ width: 180 }} onChange={handleChangeState}>
                                 <Option value="true">On</Option>
                                 <Option value="false">Off</Option>
@@ -147,6 +148,47 @@ export default function HoursLight(props) {
                         )}
                     </Card>
                 </Col>   
+                <Col xs={24} sm={12} md={8} lg={8} xl={8} xxl={8}>
+                    <Card title='Humedad' style={{margin:'2%', minHeight:'50vh'}}>     
+                        <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}> 
+                            <Humidity 
+                                height={80}  
+                                tips={[' ', ' ', ' ']}
+                                value={props.data.HumExt} 
+                            />  
+                        </div> 
+                        <h1 style={{textAlign:'center'}}>{'Externa '+props.data.HumExt+' %'}</h1>
+
+                        <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
+                            <Humidity 
+                                height={80}  
+                                tips={[' ', ' ', ' ']}
+                                value={props.data.HumInt} 
+                            />
+                        </div>
+                        <h1 style={{textAlign:'center'}}>{'Interna '+props.data.HumInt+' %'}</h1>
+                    </Card>
+                </Col>    
+                <Col xs={24} sm={12} md={8} lg={8} xl={8} xxl={8}>
+                    <Card title='Temperatura' style={{margin:'2%', minHeight:'50vh'}}>
+                        <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}> 
+                            <Humidity 
+                                height={80}  
+                                tips={[' ', ' ', ' ']}
+                                value={props.data.TempExt} 
+                            />  
+                        </div> 
+                        <h1 style={{textAlign:'center'}}>{'Externa '+props.data.TempExt+' °C'}</h1>
+                        <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
+                            <Humidity 
+                                height={80}  
+                                tips={[' ', ' ', ' ']}
+                                value={props.data.TempInt} 
+                            />
+                        </div>
+                        <h1 style={{textAlign:'center'}}>{'Interna '+props.data.TempInt+' °C'}</h1>
+                    </Card>
+                </Col>    
             </Row>
         </div>
     )
