@@ -28,6 +28,15 @@ export default function HoursLight(props) {
             Luz: value
         },{merge:true})
         .then(
+            db.collection('Equipments')
+            .doc(props.data.id)
+            .collection('Logs')
+            .add({
+                date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                description: ' Se cambia estado de luz a ' + value,
+                title:'Luz',
+                data:[{'estado':value}],
+            }),
             notification.open({
                 message: 'Luz',
                 description:
@@ -47,6 +56,15 @@ export default function HoursLight(props) {
             Luz_Fin: endTime,
         },{merge:true})
         .then(
+            db.collection('Equipments')
+            .doc(props.data.id)
+            .collection('Logs')
+            .add({
+                date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                description: ' Se cambian datos de luz, inicia a las ' + startTime + ' y termina a las ' + endTime,
+                title:'Ventilación',
+                data:[{'luzInicio': startTime, 'luzFin': endTime}],
+            }),
             notification.open({
                 message: 'Cambio exitoso',
                 description:

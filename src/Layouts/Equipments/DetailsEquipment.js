@@ -82,27 +82,26 @@ export default function DetailsEquipment() {
             </Col>
         </Row>
     );
-      
+
     const extraContent = (
         <div
-          style={{
-            display: 'flex',
-            width: 'max-content',
-            justifyContent: 'flex-end',
-            marginBottom:'2%'
-          }}
-        >
-          <Statistic
-            title="Estado"
-            value={status == 'inactive' ? 'Inactivo' : 'Activo'}
             style={{
-              marginRight: 32,
+                display: 'flex',
+                width: 'max-content',
+                justifyContent: 'flex-end',
+                marginBottom:'2%'
             }}
-          />
-          <Statistic title="Fecha" value={date.toLocaleDateString() + ' ' + date.toLocaleTimeString()} />
+        >
+            <Statistic
+                title="Estado"
+                value={status == 'inactive' ? 'Inactivo' : 'Activo'}
+                style={{
+                marginRight: 32,
+                }}
+            />
+            <Statistic title="Fecha" value={date.toLocaleDateString() + ' ' + date.toLocaleTimeString()} />
         </div>
     );
-      
     const Content = ({ children, extra }) => (
         <div className="content">
           <div className="extra">{extra}</div>
@@ -169,12 +168,12 @@ export default function DetailsEquipment() {
                         </TabPane>
                         <TabPane tab="Bombeo nutrientes" key="5" >
                             <div style={{marginTop:'2%'}} >
-                                <NutrientPumping/>
+                                <NutrientPumping datain={dataApp} data={equipment} />
                             </div>    
                         </TabPane>
                         <TabPane tab="Flush" key="6" >
                             <div style={{marginTop:'2%'}} >
-                                <Flush/>
+                                <Flush datain={dataApp} data={equipment}/>
                             </div>  
                         </TabPane>
                     </Tabs>

@@ -3,8 +3,15 @@ import { Card, Row, Col, Form, Select, InputNumber, notification, Button} from '
 import {Temperature, PM, Humidity,} from 'react-environment-chart';
 import {db} from '../../Config/Firebase'
 import {SmileOutlined} from '@ant-design/icons';
+import dayjs from 'dayjs'
+import 'dayjs/locale/es' 
 
 export default function TemperatureComponent(props) {
+
+    var idLocale = require('dayjs/locale/es'); 
+    var LocalizedFormat = require('dayjs/plugin/localizedFormat');
+    dayjs.locale('es', idLocale);
+    dayjs.extend(LocalizedFormat)
 
     const { Option } = Select;
     const [ tags, setTags] = useState([]);
@@ -48,6 +55,15 @@ export default function TemperatureComponent(props) {
             Temperatura: value
         },{merge:true})
         .then(
+            db.collection('Equipments')
+            .doc(props.data.id)
+            .collection('Logs')
+            .add({
+                date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                description: ' Se cambia estado de temperatura a ' + value,
+                title:'Temperatura',
+                data:[{'estado':value}],
+            }),
             notification.open({
                 message: 'Temperatura',
                 description:
@@ -68,6 +84,15 @@ export default function TemperatureComponent(props) {
             Temperatura_Noche: nightTemperature,
         },{merge:true})
         .then(
+            db.collection('Equipments')
+            .doc(props.data.id)
+            .collection('Logs')
+            .add({
+                date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                description: ' Se cambian datos de temperatura, temperatura día a ' + dayTemperature + ' y temperatura noche ' + nightTemperature,
+                title:'Temperatura',
+                data:[{'temperaturaDia': dayTemperature, 'temperaturaNoche': nightTemperature}],
+            }),
             //setDayTemperature(''), 
             //setNightTemperature(''),
             notification.open({

@@ -42,7 +42,7 @@ export default function ListEquipments() {
       try {
           const list = [];
           var snapshot = await db.collection("Equipments").get();
-          snapshot.forEach((doc) => {
+            snapshot.forEach(doc => {
               const { 
                 id,
                 name,
@@ -64,11 +64,10 @@ export default function ListEquipments() {
                 Status,
                 grow
               });
-
-          });
+            });
           setEquipments([...list]);
           setLoading(false)
-
+          return () => snapshot()
       } catch (e) {
         setError(
           "There's nae bleeding restaurants, I told you to upload them!"
