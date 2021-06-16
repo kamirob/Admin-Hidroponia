@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Card, Row, Col, Form, Input, InputNumber, Switch, Button} from 'antd';
+import { Card, Row, Col, Form, notification, InputNumber, Switch, Button} from 'antd';
 import {db} from '../../Config/Firebase'
 import {SmileOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs'
@@ -7,7 +7,7 @@ import 'dayjs/locale/es'
 
 export default function Flush(props) {
 
-    const [flush, setFlush] = useState(props.datain.flush)
+    const [flush, setFlush] = useState(props.datain.Flush)
 
     const save = () => {
         db.collection('Equipments')
@@ -18,6 +18,23 @@ export default function Flush(props) {
             Flush: flush,
             Flush_Comando:'true'
         },{merge:true})
+        .then(
+            db.collection('Equipments')
+            .doc(props.data.id)
+            .collection('Logs')
+            .add({
+                date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                description: ' Se cambia alor de flush a ' + flush,
+                title:'Flush',
+                data:[{'flush':flush}],
+            }),
+            notification.open({
+                message: 'Flush',
+                description:
+                'Se cambió valor de flush a ' + flush,
+                icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+            }),
+        )
     }
 
     return (
