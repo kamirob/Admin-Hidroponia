@@ -6,7 +6,19 @@ import dayjs from 'dayjs'
 import 'dayjs/locale/es' 
 
 export default function Flush(props) {
+
     const [flush, setFlush] = useState(props.datain.flush)
+
+    const save = () => {
+        db.collection('Equipments')
+        .doc(props.data.id)
+        .collection('DataApp')
+        .doc(props.data.id)
+        .set({
+            Flush: flush,
+            Flush_Comando:'true'
+        },{merge:true})
+    }
 
     return (
         <div style={{marginBottom:'3%'}}>  
@@ -24,7 +36,7 @@ export default function Flush(props) {
                                     value = {flush}
                                     onChange = {(flush) => setFlush(flush)}
                                 />
-                                <Button>Encender</Button>
+                                <Button onClick={save}>Encender</Button>
                                 <Button danger>Off</Button>
                             </Form.Item>
                             <Form.Item label="Alarma de nivel">
