@@ -135,8 +135,12 @@ export default function NutrientPumping(props) {
                                     value = {BBA1On}
                                     onChange = {(BBA1On) => setBBA1On(BBA1On)}
                                 />
-                                <Button onClick={() => saveBBA(BBA1On, 'BB1') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA1On, 'BB1') }>Encender</Button>
+                                {props.datarpi.BBA1_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="BBA2 (seg)">
                                 <InputNumber
@@ -146,8 +150,12 @@ export default function NutrientPumping(props) {
                                     value = {BBA2On}
                                     onChange = {(BBA2On) => setBBA2On(BBA2On)}
                                 />
-                                <Button onClick={() => saveBBA(BBA2On, 'BBA2') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA2On, 'BBA2') }>Encender</Button>
+                                {props.datarpi.BBA2_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="BBA3 (seg)">
                                 <InputNumber
@@ -157,8 +165,12 @@ export default function NutrientPumping(props) {
                                     value = {BBA3On}
                                     onChange = {(BBA3On) => setBBA3On(BBA3On)}
                                 />
-                                <Button onClick={() => saveBBA(BBA3On, 'BBA3') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA3On, 'BBA3') }>Encender</Button>
+                                {props.datarpi.BBA3_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="Agitador1 (min)">
                                 <InputNumber
@@ -168,8 +180,12 @@ export default function NutrientPumping(props) {
                                     value = {Ag1}
                                     onChange = {(Ag1) => setAg1(Ag1)}
                                 />
-                                <Button onClick={() => saveAg(Ag1, 'Ag1') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveAg(Ag1, 'Ag1') }>Encender</Button>
+                                {props.datarpi.Agitador1_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                         </Form>
                     </Col>   
@@ -185,8 +201,12 @@ export default function NutrientPumping(props) {
                                     value = {BBA4On}
                                     onChange = {(BBA4On) => setBBA4On(BBA4On)}
                                 />
-                                <Button onClick={() => saveBBA(BBA4On, 'BBA4') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA4On, 'BBA4') }>Encender</Button>
+                                {props.datarpi.BBA4_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="BBA5 (seg)">
                                 <InputNumber
@@ -196,8 +216,12 @@ export default function NutrientPumping(props) {
                                     value = {BBA5On}
                                     onChange = {(BBA5On) => setBBA5On(BBA5On)}
                                 />
-                                <Button onClick={() => saveBBA(BBA5On, 'BBA5') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA5On, 'BBA5') }>Encender</Button>
+                                {props.datarpi.BBA5_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="BBA6 (seg)">
                                 <InputNumber
@@ -207,8 +231,12 @@ export default function NutrientPumping(props) {
                                     value = {BBA6On}
                                     onChange = {(BBA6On) => setBBA6On(BBA6On)}
                                 />
-                                <Button onClick={() => saveBBA(BBA6On, 'BBA6') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA6On, 'BBA6') }>Encender</Button>
+                                {props.datarpi.BBA6_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="Agitador2 (min)">
                                 <InputNumber
@@ -218,8 +246,12 @@ export default function NutrientPumping(props) {
                                     value = {Ag2}
                                     onChange = {(Ag2) => setAg2(Ag2)}
                                 />
-                                <Button onClick={() => saveAg(Ag2, 'Ag2') }>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={() => saveAg(Ag2, 'Ag2') }>Encender</Button>
+                                {props.datarpi.Agitador2_Estado == 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
+                                ):(
+                                    <Button type='primary' danger style={{marginLeft:'1%'}}>Off</Button>
+                                )}
                             </Form.Item>
                         </Form>
                     </Col> 

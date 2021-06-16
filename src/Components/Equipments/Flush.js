@@ -39,6 +39,7 @@ export default function Flush(props) {
 
     return (
         <div style={{marginBottom:'3%'}}>  
+        <p>{props.datarpi.Flush_Estado} </p>
             <Card title='Variables' style={{marginTop:'5%'}}>
                 <Row type="flex">
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
@@ -53,8 +54,12 @@ export default function Flush(props) {
                                     value = {flush}
                                     onChange = {(flush) => setFlush(flush)}
                                 />
-                                <Button onClick={save}>Encender</Button>
-                                <Button danger>Off</Button>
+                                <Button type='primary' onClick={save}>Encender</Button>
+                                {props.datarpi.Flush_Estado === 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}} >ON</Button>
+                                ):(
+                                    <Button type='primary' danger>Off</Button>
+                                )}
                             </Form.Item>
                             <Form.Item label="Alarma de nivel">
                                 <Button type='primary' style={{backgroundColor:'green', borderColor:'green'}}>Off</Button>

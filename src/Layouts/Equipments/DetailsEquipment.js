@@ -27,9 +27,11 @@ export default function DetailsEquipment() {
     const [ error, setError ] = useState();
     const [ equipment, setEquipment] = useState([]);
     const [ dataApp, setDataApp] = useState([]);
+    const [ dataRpi, setDataRpi] = useState([]);
 
     
     useEffect(() => {
+        getDataRpi()
         dateActual()
         getDataApp()
         const unsubscribe = db.collection('Equipments').where('id', '==', idEquipment).onSnapshot(snap => {
@@ -54,6 +56,18 @@ export default function DetailsEquipment() {
             db.collection('Equipments').doc(idEquipment).collection('DataApp').onSnapshot(querySnapshot => {
                 querySnapshot.forEach(doc => {
                     setDataApp(doc.data())
+                })
+            });
+        }catch(e){
+            console.log(e)
+        }  
+    } 
+
+    const getDataRpi = async() => {
+        try{
+            db.collection('Equipments').doc(idEquipment).collection('DataRpi').onSnapshot(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    setDataRpi(doc.data())
                 })
             });
         }catch(e){
@@ -104,8 +118,8 @@ export default function DetailsEquipment() {
     );
     const Content = ({ children, extra }) => (
         <div className="content">
-          <div className="extra">{extra}</div>
-          <div className="main">{children}</div>
+            <div className="extra">{extra}</div>
+            <div className="main">{children}</div>
         </div>
     );
 
@@ -153,27 +167,27 @@ export default function DetailsEquipment() {
                         </TabPane>
                         <TabPane tab="Ventilación" key="2" >
                             <div style={{marginTop:'2%'}} >
-                                <VentilationComponent datain={dataApp} data={equipment} />
+                                <VentilationComponent datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>
                         </TabPane>
                         <TabPane tab="Temperatura" key="3">
                             <div style={{marginTop:'2%'}} >
-                                <TemperatureComponent datain={dataApp} data={equipment} />
+                                <TemperatureComponent datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>
                         </TabPane>
                         <TabPane tab="Horas de luz" key="4">
                             <div style={{marginTop:'2%'}}>
-                                <HoursLight datain={dataApp} data={equipment}/>
+                                <HoursLight datain={dataApp} data={equipment} datarpi={dataRpi}/>
                             </div>
                         </TabPane>
                         <TabPane tab="Bombeo nutrientes" key="5" >
                             <div style={{marginTop:'2%'}} >
-                                <NutrientPumping datain={dataApp} data={equipment} />
+                                <NutrientPumping datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>    
                         </TabPane>
                         <TabPane tab="Flush" key="6" >
                             <div style={{marginTop:'2%'}} >
-                                <Flush datain={dataApp} data={equipment}/>
+                                <Flush datarpi={dataRpi} datain={dataApp} data={equipment} />
                             </div>  
                         </TabPane>
                     </Tabs>
