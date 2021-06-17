@@ -20,6 +20,8 @@ export default function DetailsEquipment() {
     const idEquipment = history.location.state.idEquipment
     const name = history.location.state.name
     const grow= history.location.state.grow
+    const dateLastLog= history.location.state.dateLastLog
+    const descriptionLastLog= history.location.state.descriptionLastLog
     const status = history.location.state.status
     
     const [date,setDate] = useState(new Date());
@@ -89,9 +91,9 @@ export default function DetailsEquipment() {
             <Col xs={24} sm={24} md={12} lg={12} xl={12} xxl={12}>
                 <Descriptions size="small" column={column}>
                     <Descriptions.Item label="Último log">
-                        hbhsbkjbsjkvbsjkbsdjkvbsjkvsbvjksdbv
+                        {descriptionLastLog}
                     </Descriptions.Item>
-                    <Descriptions.Item label="Fecha último dato">{equipment.LastData}</Descriptions.Item>
+                    <Descriptions.Item label="Fecha último log">{dateLastLog}</Descriptions.Item>
                 </Descriptions>
             </Col>
         </Row>
@@ -162,7 +164,7 @@ export default function DetailsEquipment() {
                     <Tabs defaultActiveKey="1" size='large'>
                         <TabPane tab="EC y pH" key="1">
                             <div style={{marginTop:'2%'}} >
-                                <EcpHComponent/>
+                                <EcpHComponent datarpi={dataRpi}/>
                             </div>
                         </TabPane>
                         <TabPane tab="Ventilación" key="2" >

@@ -99,7 +99,7 @@ export default function VentilationComponent(props) {
                                 </Form.Item>
                             ):(
                                 <Form.Item label="Ventilación">
-                                    <Button size='middle' type='primary' style={{backgroundColor:'red', borderColor:'red'}}>
+                                    <Button size='middle' type='primary' danger >
                                         OFF
                                     </Button>
                                 </Form.Item>
@@ -136,13 +136,13 @@ export default function VentilationComponent(props) {
                             </Form.Item>
                             {props.datarpi.Ventilacion_Estado == 'true' ? (
                                 <Form.Item label="Ventilación">
-                                    <Button size='middle' type='primary' style={{backgroundColor:'green', borderColor:'green'}}>
+                                    <Button size='large' type='primary' style={{backgroundColor:'green', borderColor:'green'}}>
                                         ON
                                     </Button>
                                 </Form.Item>
                             ):(
                                 <Form.Item label="Ventilación">
-                                    <Button size='middle' type='primary' style={{backgroundColor:'red', borderColor:'red'}}>
+                                    <Button size='large' type='primary' danger >
                                         OFF
                                     </Button>
                                 </Form.Item>

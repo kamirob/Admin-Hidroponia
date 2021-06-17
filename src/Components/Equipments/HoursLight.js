@@ -138,7 +138,7 @@ export default function HoursLight(props) {
                                     </Form.Item>
                                 ):(
                                     <Form.Item label="Luz">
-                                        <Button size='middle' type='primary' style={{backgroundColor:'red', borderColor:'red'}}>
+                                        <Button size='middle' type='primary' danger >
                                             OFF
                                         </Button>
                                     </Form.Item>
@@ -146,7 +146,6 @@ export default function HoursLight(props) {
                                 <Button
                                     onClick={() => save()}
                                     primary
-                                    //disabled={(minutesOn == '' || minutesOff == '') ?  true : false}
                                     type='primary'
                                     shape='round' 
                                     size='large' 

@@ -47,22 +47,18 @@ export default function ListEquipments() {
                 id,
                 name,
                 ubication,
-                lastLog,
-                LastData,
                 dateLastLog,
-                Status,
-                grow
+                descriptionLastLog,
+                Status
               } = doc.data();
               list.push({
                 id: doc.id,
                 id,
                 name,
                 ubication,
-                lastLog,
-                LastData,
                 dateLastLog,
-                Status,
-                grow
+                descriptionLastLog,
+                Status
               });
             });
           setEquipments([...list]);
@@ -176,16 +172,16 @@ export default function ListEquipments() {
         align:'center'
       },
       {
-        title: 'Fecha último dato',
-        dataIndex: 'LastData',
-        key: 'LastData',
+        title: 'Fecha último log',
+        dataIndex: 'dateLastLog',
+        key: 'dateLastLog',
         width: '30%',
         align:'center'
       },
       {
         title: 'Último Log',
-        dataIndex: 'lastLog',
-        key: 'lastLog',
+        dataIndex: 'descriptionLastLog',
+        key: 'descriptionLastLog',
         width: '30%',
         align:'center'
       },
@@ -222,8 +218,8 @@ export default function ListEquipments() {
                     state: { 
                         idEquipment: record.id,
                         name: record.name,
-                        grow: record.grow,
-                        status: record.Status
+                        dateLastLog: record.dateLastLog,
+                        descriptionLastLog: record.descriptionLastLog
                     }
                   })} 
                 />
