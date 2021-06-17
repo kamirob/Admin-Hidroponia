@@ -27,9 +27,11 @@ export default function DetailsEquipment() {
     const [ error, setError ] = useState();
     const [ equipment, setEquipment] = useState([]);
     const [ dataApp, setDataApp] = useState([]);
+    const [ dataRpi, setDataRpi] = useState([]);
 
     
     useEffect(() => {
+        getDataRpi()
         dateActual()
         getDataApp()
         const unsubscribe = db.collection('Equipments').where('id', '==', idEquipment).onSnapshot(snap => {
@@ -61,6 +63,18 @@ export default function DetailsEquipment() {
         }  
     } 
 
+    const getDataRpi = async() => {
+        try{
+            db.collection('Equipments').doc(idEquipment).collection('DataRpi').onSnapshot(querySnapshot => {
+                querySnapshot.forEach(doc => {
+                    setDataRpi(doc.data())
+                })
+            });
+        }catch(e){
+            console.log(e)
+        }  
+    } 
+
 
     const renderContent = (column = 1) => (
         <Row type="flex" justify="space-between" align="middle" >
@@ -82,31 +96,30 @@ export default function DetailsEquipment() {
             </Col>
         </Row>
     );
-      
+
     const extraContent = (
         <div
-          style={{
-            display: 'flex',
-            width: 'max-content',
-            justifyContent: 'flex-end',
-            marginBottom:'2%'
-          }}
-        >
-          <Statistic
-            title="Estado"
-            value={status == 'inactive' ? 'Inactivo' : 'Activo'}
             style={{
-              marginRight: 32,
+                display: 'flex',
+                width: 'max-content',
+                justifyContent: 'flex-end',
+                marginBottom:'2%'
             }}
-          />
-          <Statistic title="Fecha" value={date.toLocaleDateString() + ' ' + date.toLocaleTimeString()} />
+        >
+            <Statistic
+                title="Estado"
+                value={status == 'inactive' ? 'Inactivo' : 'Activo'}
+                style={{
+                marginRight: 32,
+                }}
+            />
+            <Statistic title="Fecha" value={date.toLocaleDateString() + ' ' + date.toLocaleTimeString()} />
         </div>
     );
-      
     const Content = ({ children, extra }) => (
         <div className="content">
-          <div className="extra">{extra}</div>
-          <div className="main">{children}</div>
+            <div className="extra">{extra}</div>
+            <div className="main">{children}</div>
         </div>
     );
 
@@ -154,27 +167,27 @@ export default function DetailsEquipment() {
                         </TabPane>
                         <TabPane tab="Ventilación" key="2" >
                             <div style={{marginTop:'2%'}} >
-                                <VentilationComponent datain={dataApp} data={equipment} />
+                                <VentilationComponent datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>
                         </TabPane>
                         <TabPane tab="Temperatura" key="3">
                             <div style={{marginTop:'2%'}} >
-                                <TemperatureComponent datain={dataApp} data={equipment} />
+                                <TemperatureComponent datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>
                         </TabPane>
                         <TabPane tab="Horas de luz" key="4">
                             <div style={{marginTop:'2%'}}>
-                                <HoursLight datain={dataApp} data={equipment}/>
+                                <HoursLight datain={dataApp} data={equipment} datarpi={dataRpi}/>
                             </div>
                         </TabPane>
                         <TabPane tab="Bombeo nutrientes" key="5" >
                             <div style={{marginTop:'2%'}} >
-                                <NutrientPumping/>
+                                <NutrientPumping datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>    
                         </TabPane>
                         <TabPane tab="Flush" key="6" >
                             <div style={{marginTop:'2%'}} >
-                                <Flush/>
+                                <Flush datarpi={dataRpi} datain={dataApp} data={equipment} />
                             </div>  
                         </TabPane>
                     </Tabs>
