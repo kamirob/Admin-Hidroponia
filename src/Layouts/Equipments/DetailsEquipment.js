@@ -31,9 +31,9 @@ export default function DetailsEquipment() {
 
     
     useEffect(() => {
-        getDataRpi()
         dateActual()
         getDataApp()
+        getDataRpi()
         const unsubscribe = db.collection('Equipments').where('id', '==', idEquipment).onSnapshot(snap => {
             //const data = snap.docs.map(doc => doc.data())
             snap.forEach(doc => {
