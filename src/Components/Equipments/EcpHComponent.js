@@ -4,7 +4,7 @@ import {Electricity} from 'react-environment-chart';
 import {db} from '../../Config/Firebase'
 import {SmileOutlined} from '@ant-design/icons';
 
-export default function EcpHComponent() {
+export default function EcpHComponent(props) {
     return (
         <div style={{marginBottom:'3%'}}>  
             <Row type="flex" justify="space-between" align="middle"> 
@@ -13,10 +13,10 @@ export default function EcpHComponent() {
                         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}> 
                             <Electricity
                                 height={180}  
-                                value={60} 
+                                value={props.datarpi.EC} 
                             />  
                         </div> 
-                        <h1 style={{textAlign:'center'}}>60</h1>
+                        <h1 style={{textAlign:'center'}}>{props.datarpi.EC}</h1>
                     </Card>
     
                 </Col>   
@@ -25,10 +25,10 @@ export default function EcpHComponent() {
                         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}> 
                             <Electricity
                                 height={180}  
-                                value={60} 
+                                value={props.datarpi.PH}  
                             />  
                         </div> 
-                        <h1 style={{textAlign:'center'}}>60</h1>
+                        <h1 style={{textAlign:'center'}}>value={props.datarpi.PH} </h1>
                     </Card>
     
                 </Col>     

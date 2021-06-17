@@ -91,27 +91,19 @@ export default function VentilationComponent(props) {
 
                         {props.datain.Ventilacion !== 'auto' ? (
                             <>
-                                {props.datain.Ventilacion == 'true' && (
-                                    <Form.Item label="Ventilación">
-                                        <Button size='middle' type='primary' style={{backgroundColor:'green', borderColor:'green'}}>
-                                            ON
-                                        </Button>
-                                    </Form.Item>
-                                )}
-                                {props.datain.Ventilacion == 'false' && (
-                                    <Form.Item label="Ventilación">
-                                        <Button size='middle' type='primary' style={{backgroundColor:'red', borderColor:'red'}}>
-                                            OFF
-                                        </Button>
-                                    </Form.Item>
-                                )}
-                                {props.datain.Ventilacion == 'auto' && (
-                                    <Form.Item label="Ventilación">
-                                        <Button size='middle' type='ghost'>
-                                            AUTO
-                                        </Button>
-                                    </Form.Item>
-                                )}
+                            {props.datarpi.Ventilacion_Estado == 'true' ? (
+                                <Form.Item label="Ventilación">
+                                    <Button size='middle' type='primary' style={{backgroundColor:'green', borderColor:'green'}}>
+                                        ON
+                                    </Button>
+                                </Form.Item>
+                            ):(
+                                <Form.Item label="Ventilación">
+                                    <Button size='middle' type='primary' danger >
+                                        OFF
+                                    </Button>
+                                </Form.Item>
+                            )}
                             </>
                         ):(
                             <Form
@@ -142,24 +134,16 @@ export default function VentilationComponent(props) {
                                     onChange = {(minutesOff) => setMinutesOff(minutesOff)}
                                 />
                             </Form.Item>
-                            {props.datain.Ventilacion == 'true' && (
+                            {props.datarpi.Ventilacion_Estado == 'true' ? (
                                 <Form.Item label="Ventilación">
-                                    <Button size='middle' type='primary' style={{backgroundColor:'green', borderColor:'green'}}>
+                                    <Button size='large' type='primary' style={{backgroundColor:'green', borderColor:'green'}}>
                                         ON
                                     </Button>
                                 </Form.Item>
-                            )}
-                            {props.datain.Ventilacion == 'false' && (
+                            ):(
                                 <Form.Item label="Ventilación">
-                                     <Button size='middle' type='primary' style={{backgroundColor:'red', borderColor:'red'}}>
+                                    <Button size='large' type='primary' danger >
                                         OFF
-                                    </Button>
-                                </Form.Item>
-                            )}
-                            {props.datain.Ventilacion == 'auto' && (
-                                <Form.Item label="Ventilación">
-                                     <Button size='middle' type='ghost'>
-                                        AUTO
                                     </Button>
                                 </Form.Item>
                             )}
@@ -184,19 +168,19 @@ export default function VentilationComponent(props) {
                             <Humidity 
                                 height={80}  
                                 tips={[' ', ' ', ' ']}
-                                value={props.data.HumExt} 
+                                value={props.datarpi.HumExt} 
                             />  
                         </div> 
-                        <h1 style={{textAlign:'center'}}>{'Externa '+props.data.HumExt+' %'}</h1>
+                        <h1 style={{textAlign:'center'}}>{'Externa '+props.datarpi.HumExt+' %'}</h1>
 
                         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
                             <Humidity 
                                 height={80}  
                                 tips={[' ', ' ', ' ']}
-                                value={props.data.HumInt} 
+                                value={props.datarpi.HumInt} 
                             />
                         </div>
-                        <h1 style={{textAlign:'center'}}>{'Interna '+props.data.HumInt+' %'}</h1>
+                        <h1 style={{textAlign:'center'}}>{'Interna '+props.datarpi.HumInt+' %'}</h1>
                     </Card>
                 </Col>    
                 <Col xs={24} sm={12} md={8} lg={8} xl={8} xxl={8}>
@@ -205,18 +189,18 @@ export default function VentilationComponent(props) {
                             <Humidity 
                                 height={80}  
                                 tips={[' ', ' ', ' ']}
-                                value={props.data.TempExt} 
+                                value={props.datarpi.TempExt} 
                             />  
                         </div> 
-                        <h1 style={{textAlign:'center'}}>{'Externa '+props.data.TempExt+' °C'}</h1>
+                        <h1 style={{textAlign:'center'}}>{'Externa '+props.datarpi.TempExt+' °C'}</h1>
                         <div style={{display: 'flex', justifyContent:'center', alignItems:'center'}}>
                             <Humidity 
                                 height={80}  
                                 tips={[' ', ' ', ' ']}
-                                value={props.data.TempInt} 
+                                value={props.datarpi.TempInt} 
                             />
                         </div>
-                        <h1 style={{textAlign:'center'}}>{'Interna '+props.data.TempInt+' °C'}</h1>
+                        <h1 style={{textAlign:'center'}}>{'Interna '+props.datarpi.TempInt+' °C'}</h1>
                     </Card>
                 </Col>    
             </Row>

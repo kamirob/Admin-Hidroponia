@@ -62,7 +62,11 @@ export default function Flush(props) {
                                 )}
                             </Form.Item>
                             <Form.Item label="Alarma de nivel">
-                                <Button type='primary' style={{backgroundColor:'green', borderColor:'green'}}>Off</Button>
+                                {props.datarpi.Flush_Level === 'true' ? (
+                                    <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}} >ON</Button>
+                                ):(
+                                    <Button type='primary' danger>Off</Button>
+                                )}
                             </Form.Item>
                         </Form>
                     </Col>   
