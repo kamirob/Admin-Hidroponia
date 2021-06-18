@@ -24,7 +24,7 @@ export default function Flush(props) {
             .collection('Logs')
             .add({
                 date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-                description: ' Se cambia alor de flush a ' + flush,
+                description: ' Se cambia valor de flush a ' + flush,
                 title:'Flush',
                 data:[{'flush':flush}],
             }),
@@ -39,8 +39,7 @@ export default function Flush(props) {
 
     return (
         <div style={{marginBottom:'3%'}}>  
-        <p>{props.datarpi.Flush_Estado} </p>
-            <Card title='Variables' style={{marginTop:'5%'}}>
+            <Card title='Variables' style={{marginTop:'3%'}}>
                 <Row type="flex">
                     <Col xs={24} sm={24} md={24} lg={24} xl={24} xxl={24}>
                         <Form

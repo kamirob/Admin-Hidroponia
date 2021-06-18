@@ -11,6 +11,7 @@ import HoursLight from '../../Components/Equipments/HoursLight';
 import NutrientPumping from '../../Components/Equipments/NutrientPumping';
 import Flush from '../../Components/Equipments/Flush';
 import EcpHComponent from '../../Components/Equipments/EcpHComponent';
+import LogsList from '../../Components/Equipments/LogsList';
 
 export default function DetailsEquipment() {
     const { Title, Text} = Typography;
@@ -162,32 +163,37 @@ export default function DetailsEquipment() {
                 ]}
                 footer={
                     <Tabs defaultActiveKey="1" size='large'>
-                        <TabPane tab="EC y pH" key="1">
+                        <TabPane tab="Logs" key="1">
+                            <div style={{marginTop:'2%'}} >
+                                <LogsList idEquipment={idEquipment} />
+                            </div>
+                        </TabPane>
+                        <TabPane tab="EC y pH" key="2">
                             <div style={{marginTop:'2%'}} >
                                 <EcpHComponent datarpi={dataRpi}/>
                             </div>
                         </TabPane>
-                        <TabPane tab="Ventilación" key="2" >
+                        <TabPane tab="Ventilación" key="3" >
                             <div style={{marginTop:'2%'}} >
                                 <VentilationComponent datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>
                         </TabPane>
-                        <TabPane tab="Temperatura" key="3">
+                        <TabPane tab="Temperatura" key="4">
                             <div style={{marginTop:'2%'}} >
                                 <TemperatureComponent datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>
                         </TabPane>
-                        <TabPane tab="Horas de luz" key="4">
+                        <TabPane tab="Horas de luz" key="5">
                             <div style={{marginTop:'2%'}}>
                                 <HoursLight datain={dataApp} data={equipment} datarpi={dataRpi}/>
                             </div>
                         </TabPane>
-                        <TabPane tab="Bombeo nutrientes" key="5" >
+                        <TabPane tab="Bombeo nutrientes" key="6" >
                             <div style={{marginTop:'2%'}} >
                                 <NutrientPumping datain={dataApp} data={equipment} datarpi={dataRpi} />
                             </div>    
                         </TabPane>
-                        <TabPane tab="Flush" key="6" >
+                        <TabPane tab="Flush" key="7" >
                             <div style={{marginTop:'2%'}} >
                                 <Flush datarpi={dataRpi} datain={dataApp} data={equipment} />
                             </div>  
