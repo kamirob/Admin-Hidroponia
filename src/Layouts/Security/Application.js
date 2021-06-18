@@ -29,7 +29,7 @@ function Application() {
     const history = useHistory();
     const currentUser = useContext(AuthProvider);
     const [collapsed, setCollapsed] = useState(true);
-   
+
     const toggle = () => {
         setCollapsed(!collapsed)
     };
@@ -84,29 +84,7 @@ function Application() {
                                 Usuarios
                             </Link> 
                         </Menu.Item>
-                        {/**<SubMenu key="sub1" icon={<UsergroupAddOutlined />} title="Usuarios">
-                            <Menu.Item key="4" >
-                                <Link to="/students">
-                                    Estudiantes
-                                </Link> 
-                            </Menu.Item>
-                            <Menu.Item key="5" >
-                                <Link to="/teachers">
-                                    Profesores
-                                </Link> 
-                            </Menu.Item>
-                        </SubMenu>
-                       
-                        {/**<Menu.Item key="7" icon={<FundViewOutlined />}>
-                            <Link to="/offers">
-                                Ofertas
-                            </Link> 
-                        </Menu.Item>
-                        <Menu.Item key="8" icon={<DollarOutlined />}>
-                            <Link to="/payment-methods">
-                                Métodos de pago
-                            </Link> 
-                        </Menu.Item>**/}
+                      
                     </Menu>
                 </Sider>
                 <Layout className="site-layout" >
@@ -130,8 +108,8 @@ function Application() {
                         </Row>
                     
                     </Header>
-                    <Content style={{padding:'2%', minHeight:'100vh'}}/**style={{ padding:'3%', height: '150%' }}**/>
-                        <div className="site-layout-background" style={{ padding: '2%'}}/**style={{ height: '150%', padding:'3%' }}**/>
+                    <Content style={{padding:'2%', minHeight:'100vh'}}>
+                        <div className="site-layout-background" style={{ padding: '2%'}}>
                             <Switch>
                                 <Route 
                                     exact path="/"
@@ -169,7 +147,7 @@ function Application() {
                             </Switch>
                         </div> 
                     </Content>
-                    <Footer style={{ textAlign: 'center' }}>AdminWeb ©2021 por Camilo Bastidas</Footer>
+                    <Footer style={{ textAlign: 'center' }}>Admin Autogrower ©2021</Footer>
                 </Layout>
             </Layout>
             

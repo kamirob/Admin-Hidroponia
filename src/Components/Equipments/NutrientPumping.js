@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import { Card, Row, Col, Form, Input, InputNumber, Switch, Button} from 'antd';
+import { Card, Row, Col, Form, InputNumber, notification, Button} from 'antd';
 import {db} from '../../Config/Firebase'
 import {SmileOutlined} from '@ant-design/icons';
 import dayjs from 'dayjs'
@@ -13,8 +13,8 @@ export default function NutrientPumping(props) {
     const [BBA4On, setBBA4On] = useState(props.datain.BBA4)
     const [BBA5On, setBBA5On] = useState(props.datain.BBA5)
     const [BBA6On, setBBA6On] = useState(props.datain.BBA6)
-    const [Ag1, setAg1] = useState(props.datain.Ventilacion_Min_On)
-    const [Ag2, setAg2] = useState(props.datain.Ventilacion_Min_On)
+    const [Ag1, setAg1] = useState(props.datain.Ag1)
+    const [Ag2, setAg2] = useState(props.datain.Ag2)
 
     const saveBBA = (BBA, value) => {
         {value == 'BBA1' && (
@@ -26,6 +26,23 @@ export default function NutrientPumping(props) {
                 BBA1: BBA,
                 BBA1_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de BBA1 a ' + BBA,
+                    title:'Bomba nutrientes',
+                    data:[{'BBA1':BBA}],
+                }),
+                notification.open({
+                    message: 'BBA1',
+                    description:
+                    'Se cambió valor de BBA 1 a ' + BBA,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            ) 
         )}
         {value == 'BBA2' && (
             db.collection('Equipments')
@@ -36,6 +53,23 @@ export default function NutrientPumping(props) {
                 BBA2: BBA,
                 BBA2_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de BBA2 a ' + BBA,
+                    title:'Bomba nutrientes',
+                    data:[{'BBA2':BBA}],
+                }),
+                notification.open({
+                    message: 'BBA2',
+                    description:
+                    'Se cambió valor de BBA2 a ' + BBA,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            ) 
         )}
         {value == 'BBA3' && (
             db.collection('Equipments')
@@ -46,6 +80,23 @@ export default function NutrientPumping(props) {
                 BBA3: BBA,
                 BBA3_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de BBA3 a ' + BBA,
+                    title:'Bomba nutrientes',
+                    data:[{'BBA3':BBA}],
+                }),
+                notification.open({
+                    message: 'BBA3',
+                    description:
+                    'Se cambió valor de BBA3 a ' + BBA,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            ) 
         )}
         {value == 'BBA4' && (
             db.collection('Equipments')
@@ -56,6 +107,23 @@ export default function NutrientPumping(props) {
                 BBA4: BBA,
                 BBA4_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de BBA4 a ' + BBA,
+                    title:'Bomba nutrientes',
+                    data:[{'BBA4':BBA}],
+                }),
+                notification.open({
+                    message: 'BBA4',
+                    description:
+                    'Se cambió valor de BBA4 a ' + BBA,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            ) 
         )}
         {value == 'BBA5' && (
             db.collection('Equipments')
@@ -66,6 +134,23 @@ export default function NutrientPumping(props) {
                 BBA5: BBA,
                 BBA5_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de BBA5 a ' + BBA,
+                    title:'Bomba nutrientes',
+                    data:[{'BBA5':BBA}],
+                }),
+                notification.open({
+                    message: 'BBA1',
+                    description:
+                    'Se cambió valor de BBA5 a ' + BBA,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            ) 
         )}
         {value == 'BBA6' && (
             db.collection('Equipments')
@@ -76,24 +161,24 @@ export default function NutrientPumping(props) {
                 BBA6: BBA,
                 BBA6_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de BBA6 a ' + BBA,
+                    title:'Bomba nutrientes',
+                    data:[{'BBA6':BBA}],
+                }),
+                notification.open({
+                    message: 'BBA6',
+                    description:
+                    'Se cambió valor de BBA6 a ' + BBA,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            ) 
         )}
-        {/**.then(
-            db.collection('Equipments')
-            .doc(props.data.id)
-            .collection('Logs')
-            .add({
-                date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
-                description: ' Se cambian datos de ventilación, minutos ON a ' + minutesOn + ' y minutos OFF a ' + minutesOff,
-                title:'Ventilación',
-                data:[{'minutosOn':minutesOn, 'minutosOff':minutesOff}],
-            }),
-            notification.open({
-                message: 'Ventilación automática',
-                description:
-                'Se cambió el estado de la ventilación',
-                icon: <SmileOutlined style={{ color: '#108ee9' }} />,
-            }),
-        ) */}
     }
 
     const saveAg = (Ag, value) => {
@@ -106,6 +191,24 @@ export default function NutrientPumping(props) {
                 Ag1: Ag,
                 Agitador1_Comando: 'true'
             },{merge:true})
+            .then(
+                console.log('OKKKKKKKKKKK'),
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de Agitador 1 a ' + Ag,
+                    title:'Agitador',
+                    data:[{'Ag1':Ag}],
+                }),
+                notification.open({
+                    message: 'Agitador 1',
+                    description:
+                    'Se cambió valor de Agiador 1 a ' + Ag,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            )
         )}
         {value == 'Ag2' && (
             db.collection('Equipments')
@@ -116,6 +219,23 @@ export default function NutrientPumping(props) {
                 Ag2: Ag,
                 Agitador2_Comando: 'true'
             },{merge:true})
+            .then(
+                db.collection('Equipments')
+                .doc(props.data.id)
+                .collection('Logs')
+                .add({
+                    date: dayjs(new Date()).format('YYYY-MM-DD HH:mm:ss'),
+                    description: 'Se cambia valor de Agitador 1 a ' + Ag,
+                    title:'Agitador',
+                    data:[{'Ag2':Ag}],
+                }),
+                notification.open({
+                    message: 'Agitador 2',
+                    description:
+                    'Se cambió valor de Agiador 2 a ' + Ag,
+                    icon: <SmileOutlined style={{ color: '#108ee9' }} />,
+                }),
+            )
         )}
     }
 
@@ -135,7 +255,7 @@ export default function NutrientPumping(props) {
                                     value = {BBA1On}
                                     onChange = {(BBA1On) => setBBA1On(BBA1On)}
                                 />
-                                <Button type='primary' onClick={() => saveBBA(BBA1On, 'BB1') }>Encender</Button>
+                                <Button type='primary' onClick={() => saveBBA(BBA1On, 'BBA1') }>Encender</Button>
                                 {props.datarpi.BBA1_Estado == 'true' ? (
                                     <Button type='primary' style={{backgroundColor:'green', borderColor:'green', marginLeft:'1%'}}>ON</Button>
                                 ):(

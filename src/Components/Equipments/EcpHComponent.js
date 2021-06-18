@@ -28,7 +28,7 @@ export default function EcpHComponent(props) {
                                 value={props.datarpi.PH}  
                             />  
                         </div> 
-                        <h1 style={{textAlign:'center'}}>value={props.datarpi.PH} </h1>
+                        <h1 style={{textAlign:'center'}}>{props.datarpi.PH}</h1>
                     </Card>
     
                 </Col>     
